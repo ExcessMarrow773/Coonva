@@ -1,0 +1,41 @@
+<DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <script src="{% static 'script.js' %}"></script>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+<div id="toast-container"></div>
+    
+<div class="navbar">
+    <h1>{% block heading %} Welcome to <a class="button" href="{% url 'app:index' %}">Coonva</a> {% endblock heading %}</h1>
+
+    {% if user.is_authenticated %}
+        <navbar-buttons>
+            <form method="post" action="{% url 'app:logout' %}">
+	            {% block extra_navbar %}{% endblock extra_navbar %}
+	            {% csrf_token %}
+	            <button type="submit">Logout</button>
+	            {% if user.is_staff %}
+	                <a class="button" href="/admin">Admin Site</a>
+	            {% endif %}
+        	</form>
+        </navbar-buttons>
+    {% else %}
+    <navbar-buttons>
+    <a class="button" href="{% url 'app:login' %}">Login</a>
+    <a class="button" href="{% url 'app:register' %}">Sign Up</a>
+    </navbar-buttons>
+    {% endif %}
+</div>
+    {% block page_content %}
+    {% endblock page_content %}
+	
+</body>
+
+</html>
