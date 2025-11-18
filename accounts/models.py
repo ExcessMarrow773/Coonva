@@ -6,6 +6,9 @@ from django.contrib.auth.models import AbstractUser
 class CustomUser(AbstractUser):
 	following = models.ManyToManyField('self', symmetrical=False, related_name='followers', blank=True)
 
+	profile_image = models.ImageField(upload_to='media/pfps/', default='static/img/pfp.png')
+
+
 	def follow(self, user):
 		self.following.add(user)
 
