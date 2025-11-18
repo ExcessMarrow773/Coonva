@@ -12,7 +12,7 @@ class CustomUserAdmin(UserAdmin):
 			'fields': ('username', 'password')
 		}),
 		('Personal info', {
-			'fields': ('first_name', 'last_name', 'email')
+			'fields': ('first_name', 'last_name', 'email', 'profile_image')
 		}),
 		('Permissions', {
 			'fields': (
