@@ -587,9 +587,6 @@ sub {
     white-space: pre-wrap;
   }
 }
-div {
-  margin: 0.5rem 0;
-}
 
 #navbar {
   border-bottom: 5px solid var(--border);
@@ -762,4 +759,55 @@ msg .timestamp {
 .markdown-content h3 {
   margin-top: 0.5rem;
   margin-bottom: 0.25rem;
+}
+
+
+.sidenav {
+  height: 100%;
+  width: 100px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: var(--accent-bg);
+  overflow-x: hidden;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.sidenav a {
+  padding: 6px 0px 6px 0px;
+  text-decoration: none;
+  font-size: 20px;
+  color: var(--text);
+  display: block;
+}
+
+.sidenav a:hover {
+  color: var(--accent-hover);
+}
+
+.main {
+  margin-left: 100px; /* Same as the width of the sidenav */
+  padding: 12px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+/*
+Source - https://stackoverflow.com/a
+Posted by Gabriele Petrioli, modified by community. See post 'Timeline' for change history
+Retrieved 2025-11-18, License - CC BY-SA 4.0
+*/
+
+.profile_pic {
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: whhite;
+}
+.profile_pic img{
+  width:100%;
 }

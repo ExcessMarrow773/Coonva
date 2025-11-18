@@ -1,40 +1,58 @@
 <DOCTYPE html>
 <html lang="en">
 <head>
-    {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> {% block title %}{% endblock title %}</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-    <script src="{% static 'script.js' %}"></script>
-    {% block extra_head %}{% endblock %}
+	{% load static %}
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> {% block title %}{% endblock title %}</title>
+	<link rel="stylesheet" href="{% static 'styles.css' %}">
+	<script src="{% static 'script.js' %}"></script>
+	{% block extra_head %}{% endblock %}
 </head>
-<body>
-<div id="toast-container"></div>
-    
-<div class="navbar">
-    <h1>{% block heading %} Welcome to <a class="button" href="{% url 'app:index' %}">Coonva</a> {% endblock heading %}</h1>
 
-    {% if user.is_authenticated %}
-        <navbar-buttons>
-            <form method="post" action="{% url 'app:logout' %}">
-	            {% block extra_navbar %}{% endblock extra_navbar %}
-	            {% csrf_token %}
-	            <button type="submit">Logout</button>
-	            {% if user.is_staff %}
-	                <a class="button" href="/admin">Admin Site</a>
-	            {% endif %}
-        	</form>
-        </navbar-buttons>
-    {% else %}
-    <navbar-buttons>
-    <a class="button" href="{% url 'app:login' %}">Login</a>
-    <a class="button" href="{% url 'app:register' %}">Sign Up</a>
-    </navbar-buttons>
-    {% endif %}
+<div class="sidenav">
+	{% if user.is_authenticated %}
+
+		<img class='profile_pic' src='/{{ user.profile_image }}'></img>
+		<h3>{{ user.username.upper }}</h3>
+	{% endif %}
+	<a href="{% url "app:index" %}"> Home</a>
+	<a href="{% url "accounts:settings" %}"> Settings</a>
+	<a href="#services">Services</a>
+	<a href="#clients">Clients</a>
+	<a href="#contact">Contact</a>
+	{% block sidebar%}
+	{% endblock sidebar %}
 </div>
-    {% block page_content %}
-    {% endblock page_content %}
+
+
+<body class="main">
+<div id="toast-container"></div>
+<div class="navbar">
+	<h1>{% block heading %}{% endblock heading %}</h1>
+
+	{% if user.is_authenticated %}
+		<navbar-buttons>
+			<form method="post" action="{% url 'accounts:logout' %}">
+				{% block extra_navbar %}{% endblock extra_navbar %}
+				{% csrf_token %}
+				<button type="submit">Logout</button>
+				{% if user.is_staff %}
+					<a class="button" href="/admin">Admin Site</a>
+				{% endif %}
+			</form>
+		</navbar-buttons>
+	{% else %}
+	<navbar-buttons>
+		<form>
+			<a class="button" href="{% url 'accounts:login' %}">Login</a>
+			<a class="button" href="{% url 'accounts:register' %}">Sign Up</a>
+		</form>
+	</navbar-buttons>
+	{% endif %}
+</div>
+	{% block page_content %}
+	{% endblock page_content %}
 	
 </body>
 
