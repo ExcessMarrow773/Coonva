@@ -29,7 +29,10 @@ try:
 
 		subprocess.run(['./.venv/bin/python3', 'manage.py', 'migrate'])
 		print("Starting server on http://127.0.0.1:8000\n")
-		subprocess.run(['./.venv/bin/python3', 'manage.py', 'runserver', '0.0.0.0:8000'])
+		if subprocess.check_output(['hostname']) == b'yeti\n':
+			subprocess.run(['./.venv/bin/python3', 'manage.py', 'runserver', '0.0.0.0:2001'])
+		else:
+			subprocess.run(['./.venv/bin/python3', 'manage.py', 'runserver', '0.0.0.0:8000'])
 except KeyboardInterrupt:
 	print('\n\nStopping server and exiting program')
 	print('Server stopped, database saved')
