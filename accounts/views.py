@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model, login
 from django.shortcuts import redirect
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
-from .forms import CustomAuthenticationForm, CustomUserCreationForm, ProfileImageChange
+from .forms import CustomAuthenticationForm, CustomUserCreationForm, ProfileDetailsChange, ProfilePasswordChange, ProfileUsernameChange
 
 
 from itertools import chain
@@ -21,15 +21,26 @@ User = get_user_model()
 
 @login_required(login_url='/login/')
 def settings(request):
+	print(request.POST)
 	userModel = get_object_or_404(User, username=request.user.username)
 
 	if request.method == "POST":
-		form = ProfileImageChange(request.POST, request.FILES, instance=userModel)
+		if 'changeUsername/' in request.path:
+			form = ProfileUsernameChange(request.POST, instance=userModel)
+		elif 'changePassword/' in request.path:
+			form = ProfilePasswordChange(user=request.user, data=request.POST)
+		else:
+			form = ProfileDetailsChange(request.POST, request.FILES, instance=userModel)
 		if form.is_valid():
 			form.save()
 			return redirect('accounts:settings')
 	else:
-		form = ProfileImageChange()
+		if 'changeUsername/' in request.path:
+			form = ProfileUsernameChange()
+		elif 'changePassword/' in request.path:
+			form = ProfilePasswordChange(user=request.user)
+		else:
+			form = ProfileDetailsChange()
 
 	context = {'form': form, 'mymodel_instance': userModel}
 
