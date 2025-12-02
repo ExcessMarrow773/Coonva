@@ -36,11 +36,11 @@ def settings(request):
 			return redirect('accounts:settings')
 	else:
 		if 'changeUsername/' in request.path:
-			form = ProfileUsernameChange()
+			form = ProfileUsernameChange(instance=userModel)
 		elif 'changePassword/' in request.path:
 			form = ProfilePasswordChange(user=request.user)
 		else:
-			form = ProfileDetailsChange()
+			form = ProfileDetailsChange(instance=userModel)
 
 	context = {'form': form, 'mymodel_instance': userModel}
 

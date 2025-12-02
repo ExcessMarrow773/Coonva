@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block page_content %}
-<form method="post">
+<form method="post" enctype="multipart/form-data">
 	{% if request.path == '/settings/' %}
 	<a class='button' href='{% url 'accounts:changeUsername' %}'>Change Username</a>
 	<a class='button' href='{% url 'accounts:changePassword' %}'>Change Password</a>
