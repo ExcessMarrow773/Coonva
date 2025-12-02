@@ -12,9 +12,8 @@
 
 <div class="sidenav">
 	{% if user.is_authenticated %}
-		<div class='profile_pic'>
-		<img src='{{ user.profile_image.url }}'></img>
-		</div>
+
+		<img class='profile_pic' width="75" height="75" src='{{ user.profile_image.url }}'></img>
 		<h3>{{ user.username.upper }}</h3>
 	{% endif %}
 	<a href="{% url "app:index" %}"> Home</a>

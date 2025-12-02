@@ -19,8 +19,8 @@ try:
 		subprocess.run(['./.venv/Scripts/python.exe', 'manage.py', 'makemigrations'])
 
 		subprocess.run(['./.venv/Scripts/python.exe', 'manage.py', 'migrate'])
-		print("Starting server on http://127.0.0.1:8000\n")
-		subprocess.run(['./.venv/Scripts/python.exe', 'manage.py', 'runserver', '0.0.0.0:8000'])
+		print("Starting server on http://127.0.0.1:8080\n")
+		subprocess.run(['./.venv/Scripts/python.exe', 'manage.py', 'runserver', '0.0.0.0:8080'])
 	else:
 		print("Starting application...\n")
 		subprocess.run(['git', 'pull'])
@@ -28,11 +28,11 @@ try:
 		subprocess.run(['./.venv/bin/python3', 'manage.py', 'makemigrations'])
 
 		subprocess.run(['./.venv/bin/python3', 'manage.py', 'migrate'])
-		print("Starting server on http://127.0.0.1:8000\n")
+		print("Starting server on http://127.0.0.1:8080\n")
 		if subprocess.check_output(['hostname']) == b'yeti\n':
 			subprocess.run(['./.venv/bin/python3', 'manage.py', 'runserver', '0.0.0.0:2001'])
 		else:
-			subprocess.run(['./.venv/bin/python3', 'manage.py', 'runserver', '0.0.0.0:8000'])
+			subprocess.run(['./.venv/bin/python3', 'manage.py', 'runserver', '0.0.0.0:8080'])
 except KeyboardInterrupt:
 	print('\n\nStopping server and exiting program')
 	print('Server stopped, database saved')
