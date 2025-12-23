@@ -9,11 +9,18 @@ import cv2
 import os
 # Create your models here.
 
+TYPE_CHOICES = {
+	'STUDENT': 'Student',
+	'TEACHER': 'Teacher',
+	'ADMIN': 'Administrator'
+}
+
 class CustomUser(AbstractUser):
 	profile_image = models.ImageField(upload_to='pfps/', default='static/img/pfp.png')
 
 	# make email unique because it's used as the USERNAME_FIELD
 	email = models.EmailField(max_length=254, unique=True)
+	type = models.CharField(choices=TYPE_CHOICES, max_length=16, default='ADMIN')
 
 	USERNAME_FIELD = 'email'
 	REQUIRED_FIELDS = ['username']
