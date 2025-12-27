@@ -749,6 +749,7 @@ class {
   border-radius: 12px;
   background: var(--accent-bg);
   padding: 12px;
+  cursor: pointer;
 }
 
 name {
