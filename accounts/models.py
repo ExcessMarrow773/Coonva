@@ -10,9 +10,9 @@ import os
 # Create your models here.
 
 TYPE_CHOICES = {
-	'STUDENT': 'Student',
+	'ADMIN': 'Administrator',
 	'TEACHER': 'Teacher',
-	'ADMIN': 'Administrator'
+	'STUDENT': 'Student',
 }
 
 class CustomUser(AbstractUser):

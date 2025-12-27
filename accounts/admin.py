@@ -6,7 +6,6 @@ from .models import CustomUser
 # Register your models here.
 
 class CustomUserAdmin(UserAdmin):
-	
 	fieldsets = (
 		(None, {
 			'fields': ('username', 'password')
