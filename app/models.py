@@ -28,8 +28,15 @@ class Assignment(models.Model):
 
 
 class Class(models.Model):
-	name = models.CharField(max_length=25)
-	author = models.CharField(max_length=100, default='admin')
+	title = models.CharField(max_length=25)
+	teachers = models.ManyToManyField(User,limit_choices_to={'type': 'TEACHER'}, related_name="teaching", blank=True)
+	created_on = DateTimeNow
+
+	students = models.ManyToManyField(User,limit_choices_to={'type': 'STUDENT'}, related_name="classes", blank=True)
+	assignments = models.ManyToManyField(Assignment, blank=True, null=True, related_name='Class')
+
+	class Meta:
+		verbose_name_plural = 'Classes'
 
 	students = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="classes", blank=True)
 	student_count = models.IntegerField(default=0)
