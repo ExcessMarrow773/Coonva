@@ -21,6 +21,9 @@ class CustomUserAdmin(UserAdmin):
 		}),
 		('Important dates', {
 			'fields': ('last_login', 'date_joined')
+		}),
+		(None, {
+			'fields': ['type']
 		})
 	)
 
