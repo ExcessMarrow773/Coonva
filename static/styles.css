@@ -742,3 +742,30 @@ Retrieved 2025-11-18, License - CC BY-SA 4.0
   object-position: center;
   display: block; /* Removes any extra space below the image */
 }
+
+class {
+/*  height: 150px;*/
+  width: fit-content;
+  border-radius: 12px;
+  background: var(--accent-bg);
+  padding: 12px;
+}
+
+name {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+/*  gap: 0px;*/
+}
+
+/* Adjust for different screen sizes */
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
