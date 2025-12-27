@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+
+
+<div class="grid-container">
+{% for class in classes %}
+<class  onclick="window.location.href='{% url "app:classView" class.pk %}'">
+	<name>{{class.title}}</name>
+	{{class.teachers.get}}
+</class>
+{% endfor %}
+</div>
+
+{% endblock page_content %}
