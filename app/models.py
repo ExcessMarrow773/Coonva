@@ -14,6 +14,19 @@ DateTimeNow = models.DateTimeField(default=timezone.now)
 
 # Create your models here.
 
+
+class Assignment(models.Model):
+	name = models.CharField(max_length=255)
+	due_at = models.DateTimeField()
+	created_on = DateTimeNow
+	locks_at = models.DateTimeField()
+
+	details = models.TextField()
+
+	def __str__(self):
+		return self.name
+
+
 class Class(models.Model):
 	name = models.CharField(max_length=25)
 	author = models.CharField(max_length=100, default='admin')
