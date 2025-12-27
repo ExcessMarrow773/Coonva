@@ -2,10 +2,15 @@ from django.db import models
 from django.utils import timezone
 from django.core.validators import FileExtensionValidator
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from coonva import settings
 import datetime
 import cv2
 import os
+
+User = get_user_model()
+
+DateTimeNow = models.DateTimeField(default=timezone.now)
 
 # Create your models here.
 
