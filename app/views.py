@@ -16,3 +16,18 @@ def index(request):
 	}
 	return render(request, 'app/index.html', context)
 
+def classList(request):
+	classes = Class.objects.filter(students=request.user.id)
+	context = {
+		'classes': classes
+	}
+	return render(request, 'app/classList.html', context)
+
+def classView(request, pk):
+	classView = Class.objects.get(pk=pk)
+	assignments = classView.assignments.all()
+	context = {
+		'class': classView,
+		'assignments': assignments
+	}
+	return render(request, 'app/class.html', context)
