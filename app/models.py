@@ -38,5 +38,10 @@ class Class(models.Model):
 	class Meta:
 		verbose_name_plural = 'Classes'
 
-	students = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="classes", blank=True)
-	student_count = models.IntegerField(default=0)
+	def __str__(self):
+		return self.title
+
+class Submission(models.Model):
+	created_on = DateTimeNow
+	assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE, related_name='assignmentSubmission')
+	student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='submissions', limit_choices_to={'type': 'STUDENT'})
