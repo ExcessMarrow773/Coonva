@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block heading %}{{ class.title }}{% endblock %}
+
+{% block page_content %}
+<div class="grid-container">
+{% for i in assignments %}
+<class>
+	<name>{{i.name}}</name>
+	{{i.details}}
+</class>
+{% endfor %}
+</div>
+{% endblock %}
