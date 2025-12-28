@@ -33,7 +33,7 @@ class AssignmentAdmin(admin.ModelAdmin):
 
 	fieldsets = [
 		(None, {
-			'fields': ('name', 'details')
+			'fields': ('name', 'details', 'type')
 			}
 		),
 		('Dates', {

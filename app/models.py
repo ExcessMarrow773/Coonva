@@ -15,11 +15,19 @@ DateTimeNow = models.DateTimeField(default=timezone.now)
 # Create your models here.
 
 
+assignmentType = {
+	'URL': 'Url submission',
+	'FILE': 'File submission',
+	'TEXT': 'Text submission',
+}
+
 class Assignment(models.Model):
 	name = models.CharField(max_length=255)
 	due_at = models.DateTimeField()
 	created_on = DateTimeNow
 	locks_at = models.DateTimeField()
+
+	type = models.CharField(choices=assignmentType, max_length=25, default='URL')
 
 	details = models.TextField()
 
