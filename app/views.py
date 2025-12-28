@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import get_user_model
 from itertools import chain
 from operator import attrgetter
-from .models import Class
+from .models import Class, Assignment, Submission
 
 import os
 import json
@@ -31,3 +31,11 @@ def classView(request, pk):
 		'assignments': assignments
 	}
 	return render(request, 'app/class.html', context)
+
+def assignmentView(request, pk):
+	assignment = Assignment.objects.get(pk=pk)
+
+	context = {
+		'assignment': assignment,
+	}
+	return render(request, 'app/assignment.html', context)

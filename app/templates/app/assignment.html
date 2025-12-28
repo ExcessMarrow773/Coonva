@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block heading %}{{assignment.name}}{% endblock %}
+
+{% block page_content %}
+{{ assignment.details }}
+
+{{assignment.type}}
+
+<h3>
+{% if assignment.type == 'URL' %}
+URL
+{% elif assignment.type == 'FILE' %}
+FILE
+{% elif assignment.type == 'TEXT' %}
+TEXT
+{% endif %}
+</h3>
+
+
+{% endblock page_content %}
