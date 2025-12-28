@@ -5,7 +5,7 @@
 {% block page_content %}
 <div class="grid-container">
 {% for i in assignments %}
-<class>
+<class onclick="window.location.href='{% url "app:assignmentView" i.pk %}'">
 	<name>{{i.name}}</name>
 	{{i.details}}
 </class>
