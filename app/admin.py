@@ -39,7 +39,14 @@ class AssignmentAdmin(admin.ModelAdmin):
 		('Dates', {
 			'fields': ('due_at', 'created_on', 'locks_at')
 			}
-		)]
+		),
+		('Student Data', {
+			'fields': ['submitted']
+			}
+		)
+		]
+
+	readonly_fields = ('submitted', 'created_on')
 
 @admin.register(Submission)
 class SubmissionAdmin(admin.ModelAdmin):

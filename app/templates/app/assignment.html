@@ -8,14 +8,21 @@
 {{assignment.type}}
 
 <h3>
-{% if assignment.type == 'URL' %}
-URL
-{% elif assignment.type == 'FILE' %}
-FILE
-{% elif assignment.type == 'TEXT' %}
-TEXT
-{% endif %}
+<form method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+		{{ assignment }}<br><br>
+	{% if assignment.type == 'URL' %}
+		Link Upload: 
+		{{ form.URL }}
+	{% elif assignment.type == 'FILE' %}
+		File Upload<br>
+		{{ form.file }}
+	{% elif assignment.type == 'TEXT' %}
+		Details<br>
+		{{ form.text }}
+	{% endif %}
+	<br><button type="submit">Submit</button>
+</form>
 </h3>
-
 
 {% endblock page_content %}

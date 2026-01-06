@@ -35,7 +35,40 @@ def classView(request, pk):
 def assignmentView(request, pk):
 	assignment = Assignment.objects.get(pk=pk)
 
+	if request.method == "POST":
+		form = SubmissionForm(request.POST, request.FILES)
+
+		if request.user in assignment.submitted.all():
+			return redirect('app:assignments')
+		if form.is_valid():
+			if form.cleaned_data["URL"]:
+				URL=form.cleaned_data["URL"]
+			else: URL = None
+
+			if form.cleaned_data["text"]:
+				text=form.cleaned_data["text"]
+			else: text = None
+
+			if form.cleaned_data["file"]:
+				file=form.cleaned_data["file"]
+			else: file = None
+			submission = Submission(
+				student=request.user,
+				assignment=assignment,
+				URL=URL,
+				text=text,
+				file=file,
+			)
+			submission.save()
+			assignment.submitted.add(request.user)
+			assignment.save()
+			return redirect('app:index')
+	else:
+		form = SubmissionForm()
+	print(form)
+
 	context = {
 		'assignment': assignment,
+		'form': form
 	}
 	return render(request, 'app/assignment.html', context)

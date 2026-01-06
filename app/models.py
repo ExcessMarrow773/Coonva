@@ -26,10 +26,12 @@ class Assignment(models.Model):
 	due_at = models.DateTimeField()
 	created_on = DateTimeNow
 	locks_at = models.DateTimeField()
+	submitted = models.ManyToManyField(User, limit_choices_to={'type': 'STUDENT'}, related_name="submitted")
 
 	type = models.CharField(choices=assignmentType, max_length=25, default='URL')
-
 	details = models.TextField()
+
+
 
 	def __str__(self):
 		return self.name
