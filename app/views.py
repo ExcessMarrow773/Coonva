@@ -2,7 +2,10 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import get_user_model
 from itertools import chain
 from operator import attrgetter
+from django.shortcuts import redirect
 from .models import Class, Assignment, Submission
+from .forms import SubmissionForm
+
 
 import os
 import json

@@ -50,6 +50,7 @@ class AssignmentAdmin(admin.ModelAdmin):
 
 @admin.register(Submission)
 class SubmissionAdmin(admin.ModelAdmin):
+	readonly_fields = ('student', 'created_on', 'URL', 'file', 'text', 'assignment')
 	list_display = ('student', 'created_on')
 	list_filter = ['created_on']
 	date_hierarchy = 'created_on'
