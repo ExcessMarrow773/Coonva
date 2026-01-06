@@ -43,7 +43,7 @@ class Class(models.Model):
 	created_on = DateTimeNow
 
 	students = models.ManyToManyField(User,limit_choices_to={'type': 'STUDENT'}, related_name="classes", blank=True)
-	assignments = models.ManyToManyField(Assignment, blank=True, null=True, related_name='Class')
+	assignments = models.ManyToManyField(Assignment, blank=True, related_name='Class')
 
 	class Meta:
 		verbose_name_plural = 'Classes'
