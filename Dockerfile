@@ -2,9 +2,9 @@
 FROM python:3.12.2-slim-bookworm
 
 # Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-ENV VIRTUAL_ENV ./.venv
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV VIRTUAL_ENV=./.venv
 
 # Create and set work directory called `app`
 RUN mkdir -p /code
