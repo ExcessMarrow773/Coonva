@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
 import os
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,8 +27,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'oi01p)*&Ybnl908oh72qjikdn-9q8e-cqijk;dkmnqwq3)(*&)*(UYH jbn087y08734y6oijhokjn)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-docker = True
+DEBUG = os.getenv('DEBUG') == True
+docker = os.getenv('DOCKER') == True
 ALLOWED_HOSTS = ['192.168.1.199', '127.0.0.1', '192.168.3.146', '0.0.0.0', 'localhost']
 
 
