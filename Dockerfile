@@ -4,14 +4,15 @@ FROM nginx:latest
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
-ENV PYTHONPATH="/code:$PYTHONPATH"
-ENV VIRTUAL_ENV=/code/.venv
-ENV PATH="$VIRTUAL_ENV/"bin":$PATH"
+ENV VIRTUAL_ENV=./code/.venv
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+ENV PYTHONPATH=/code/.venv/bin/python3
 # Create and set work directory called `code`
 RUN mkdir -p /code
 WORKDIR /code
 
-RUN apt update && apt install -y python3 python3-venv python3-pip gunicorn
+RUN apt update 
+RUN apt install -y python3 python3-venv python3-pip gunicorn
 
 # Install dependencies
 RUN python3 -m venv $VIRTUAL_ENV
