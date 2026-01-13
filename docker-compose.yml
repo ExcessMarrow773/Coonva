@@ -6,6 +6,8 @@ services:
       - .:/code
       - static_volume:/static
       - media_volume:/media
+    ports:
+      - "2001:8080"
     expose:
       - 8000
     depends_on:
@@ -14,7 +16,7 @@ services:
   nginx:
     build: ./nginx
     ports:
-      - "8000:80"
+      - "8000:8000"
     volumes:
       - static_volume:/static
       - media_volume:/media
