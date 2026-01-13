@@ -1,6 +1,7 @@
-python3 /code/manage.py collectstatic 
-python3 /code/manage.py migrate 
+#!/bin/sh
+set -e
 
-cd /code/
-ls
-.venv/bin/gunicorn coonva.wsgi --bind 0.0.0.0:8000
+python manage.py collectstatic --noinput
+python manage.py migrate
+
+gunicorn coonva.wsgi:application --bind 0.0.0.0:8080

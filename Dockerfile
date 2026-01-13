@@ -1,33 +1,20 @@
-# Pull base image
-FROM nginx:latest
+FROM python:3.12-slim
 
-# Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
-ENV VIRTUAL_ENV=./code/.venv
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
-ENV PYTHONPATH=/code/.venv/bin/python3
-# Create and set work directory called `code`
-RUN mkdir -p /code
+
 WORKDIR /code
 
-RUN apt update 
-RUN apt install -y python3 python3-venv python3-pip gunicorn
+RUN apt-get update && apt-get install -y \
+    gcc \
+    libpq-dev \
+ && rm -rf /var/lib/apt/lists/*
 
-# Install dependencies
-RUN python3 -m venv $VIRTUAL_ENV
-COPY requirements.txt /tmp/requirements.txt
+COPY requirements.txt .
+RUN pip install --upgrade pip && pip install -r requirements.txt
 
-RUN set -ex && \
-    pip install --upgrade pip && \
-    pip install -r /tmp/requirements.txt && \
-    rm -rf /root/.cache/ /code/media/pfps/*
+COPY . .
 
-# Copy local project
-COPY . /code/
-
-# Expose port 8000
 EXPOSE 8000
 
-# Use gunicorn on port 8000
-CMD ["gunicorn", "--bind", ":8000", "--workers", "2", "django_project.wsgi"]
+CMD ["gunicorn", "coonva.wsgi:application", "--bind", "0.0.0.0:8080"]
