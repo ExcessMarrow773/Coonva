@@ -30,7 +30,7 @@ try:
 		subprocess.run(['./.venv/bin/python3', 'manage.py', 'migrate'])
 		print("Starting server on http://127.0.0.1:8080\n")
 		if subprocess.check_output(['hostname']) == b'yeti\n':
-			subprocess.run(['./.venv/bin/python3', 'manage.py', 'runserver', '0.0.0.0:2001'])
+			subprocess.run(['./.venv/bin/python3', 'manage.py', 'runserver', '0.0.0.0:8000'])
 		else:
 			subprocess.run(['./.venv/bin/python3', 'manage.py', 'runserver', '0.0.0.0:8080'])
 except KeyboardInterrupt:

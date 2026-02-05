@@ -15,6 +15,8 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 
 COPY . .
 
+RUN mkdir -p /code/media && chmod 755 /code/media
+
 EXPOSE 8000
 
 CMD ["gunicorn", "coonva.wsgi:application", "--bind", "0.0.0.0:8080"]
