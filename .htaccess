@@ -1,0 +1,29 @@
+# Enable rewrite engine
+RewriteEngine On
+
+# Passenger configuration - MUST come before other rules
+PassengerEnabled On
+PassengerAppRoot /home/your_cpanel_username/public_html
+
+# Python version (adjust to match your cPanel Python app)
+PassengerPython /home/your_cpanel_username/virtualenv/public_html/bin/python3
+
+# Set WSGI file as the startup file
+PassengerStartupFile passenger_wsgi.py
+
+# Set environment to production
+SetEnv DJANGO_SETTINGS_MODULE coonva.settings
+
+# Serve static files directly (don't route through Django)
+RewriteCond %{REQUEST_URI} ^/coonvaStatic/ [OR]
+RewriteCond %{REQUEST_URI} ^/coonvaMedia/
+RewriteRule ^ - [L]
+
+# Route everything else to Django
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /passenger_wsgi.py/$1 [QSA,L]
+
+# Security headers
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set X-Content-Type-Options "nosniff"
