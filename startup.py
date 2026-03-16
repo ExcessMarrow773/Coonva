@@ -12,6 +12,7 @@ if config[0] == 'first_run=True':
 	with open('CONFIG', 'w') as f:
 		f.write('first_run=False\n')
 try:
+#	subprocess.run(['docker', 'compose', 'down'])
 	if platform.system() == 'Windows':
 		print("Starting application...\n")
 		subprocess.run(['git', 'pull'])

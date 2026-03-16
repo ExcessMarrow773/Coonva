@@ -1,6 +1,9 @@
 #!/bin/sh
 set -e
 
+echo "debug=True" > /code/.env
+echo "docker=True" >> /code/.env
+
 # Collect static files
 python manage.py collectstatic --noinput
 
